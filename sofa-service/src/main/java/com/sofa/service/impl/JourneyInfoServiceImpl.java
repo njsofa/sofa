@@ -14,6 +14,6 @@ public class JourneyInfoServiceImpl implements JourneyInfoService {
  
 	@Override
 	public JourneyInfo selectById(String id) {
-		return journeyInfoMapper.selectById(id);
+		return journeyInfoMapper.selectByPrimaryKey(id);
 	}
 }

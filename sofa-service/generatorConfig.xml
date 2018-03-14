@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE generatorConfiguration  
+      PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"  
+      "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">  
+  
+<generatorConfiguration>  
+    <classPathEntry location="E:\maven_repository\mysql\mysql-connector-java\5.1.39\mysql-connector-java-5.1.39.jar" />  
+    <context id="DB2Tables" targetRuntime="MyBatis3">  
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"  
+            connectionURL="jdbc:mysql://localhost:3306/sofa"
+            userId="root"
+            password="weiyimei">
+        </jdbcConnection>  
+  
+        <javaTypeResolver >  
+            <property name="forceBigDecimals" value="false" />  
+        </javaTypeResolver>  
+        <!-- generate Model -->  
+        <javaModelGenerator targetPackage="com.sofa.model" targetProject="C:\Users\Administrator\git\sofa\sofa-service\src\main\java">
+            <property name="enableSubPackages" value="true" />  
+            <property name="trimStrings" value="true" />  
+			<property name="rootInterface" value="java.io.Serializable"/>
+        </javaModelGenerator>  
+        
+        <!-- generate xml -->  
+        <sqlMapGenerator targetPackage="mapper.sofa" targetProject="C:\Users\Administrator\git\sofa\sofa-service\src\main\resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+          
+        <!-- generate Mapper -->  
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.sofa.mapper" targetProject="C:\Users\Administrator\git\sofa\sofa-service\src\main\java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <table schema="" tableName="common_accusation_info" domainObjectName="CommonAccusationInfo">
+        </table>
+
+        <table schema="" tableName="common_city_info" domainObjectName="CityInfo">
+        </table>
+
+        <table schema="" tableName="common_enshrine_info" domainObjectName="EnshrineInfo">
+        </table>
+
+        <table schema="" tableName="journey_comment_info" domainObjectName="JourneyCommentInfo">
+        </table>
+
+        <table schema="" tableName="journey_info" domainObjectName="JourneyInfo">
+        </table>
+
+        <table schema="" tableName="journey_star_info" domainObjectName="JourneyStarInfo">
+        </table>
+
+        <table schema="" tableName="journey_user_info" domainObjectName="JourneyUserInfo">
+        </table>
+
+        <table schema="" tableName="user_info" domainObjectName="UserInfo">
+        </table>
+    </context>  
+</generatorConfiguration>
