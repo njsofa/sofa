@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.sofa</groupId>
+  <artifactId>sofa</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>sofa</name>
+
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>1.5.7.RELEASE</version>
+  </parent>
+
+  <properties>
+   		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  		<!-- mybatis版本号 -->
+		<mybatis.version>3.2.4</mybatis.version>
+
+  </properties>
+
+	<dependencies>
+		 <!-- mybatis 分页插件 -->
+		<dependency>
+			<groupId>com.github.miemiedev</groupId>
+			<artifactId>mybatis-paginator</artifactId>
+			<version>1.2.15</version>
+		</dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+	    <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+        <!--<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>-->
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis -->
+		<dependency>
+   			 <groupId>org.springframework.boot</groupId>
+   			 <artifactId>spring-boot-starter-data-redis</artifactId>
+   			 <optional>true</optional>
+		</dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.0.11</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+
+
+	   <!-- spring cloud  begin -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-hystrix</artifactId>
+        </dependency>
+		<!-- spring cloud end -->
+
+	</dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>Dalston.SR4</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.googlecode.log4jdbc</groupId>
+        <artifactId>log4jdbc</artifactId>
+        <version>1.2</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+
+
+  <build>
+
+    <!-- 配置java版本 不配置的话默认父类配置的是1.6 不用spring boot 的maven 防止被依赖的子工程无法正常被引用-->
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>2.3.1</version>
+          <configuration>
+            <source>1.8</source>
+            <target>1.8</target>
+            <encoding>UTF-8</encoding>
+          </configuration>
+        </plugin>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-surefire-plugin</artifactId>
+              <version>2.6</version>
+          </plugin>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-eclipse-plugin</artifactId>
+              <version>2.8</version>
+              <configuration>
+                  <downloadSources>true</downloadSources>
+                  <downloadJavadocs>true</downloadJavadocs>
+              </configuration>
+          </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+   <modules>
+       <module>sofa-service</module>
+       <module>sofa-basic</module>
+   </modules>
+
+    <repositories>
+        <repository>
+            <id>edas-oss-central</id>
+            <name>taobao mirror central</name>
+            <url>
+                http://edas-public.oss-cn-hangzhou.aliyuncs.com/repository
+            </url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>edas-oss-plugin-central</id>
+            <url>
+                http://edas-public.oss-cn-hangzhou.aliyuncs.com/repository
+            </url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <profiles>
+        <profile>
+            <id>wym-nexus</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>wym-nexus</id>
+                    <name>微医美私库</name>
+                    <url>http://192.168.0.70:8081/nexus/content/groups/public/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>interval:60</updatePolicy>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>wym-nexus</id>
+                    <name>微医美私库</name>
+                    <url>http://192.168.0.70:8081/nexus/content/groups/public/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>interval:60</updatePolicy>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+            <distributionManagement>
+                <repository>
+                    <id>wym-release-repository</id>
+                    <name>微医美发布仓库</name>
+                    <url>http://192.168.0.70:8081/nexus/content/repositories/releases/</url>
+                </repository>
+                <snapshotRepository>
+                    <id>wym-snapshot-repository</id>
+                    <name>微医美快照仓库</name>
+                    <url>http://192.168.0.70:8081/nexus/content/repositories/snapshots/</url>
+                </snapshotRepository>
+            </distributionManagement>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.2.1</version>
+                        <configuration>
+                            <attach>true</attach>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>

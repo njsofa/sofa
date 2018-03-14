@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="10 seconds" >
+<include resource="org/springframework/boot/logging/logback/base.xml" />
+	 <logger name="org.springframework" level="WARN" />
+     <logger name="org.apache.activemq" level="INFO" />
+     <logger name="org.apache.zookeeper" level="INFO" />
+     <logger name="com.wym" level="DEBUG" >
+     </logger>
+      <!--文件输出的格式设置 -->
+     <appender name="FILE"
+          class="ch.qos.logback.core.rolling.RollingFileAppender">
+          <!-- 文件输出的日志 的格式 -->
+          <encoder>
+              <pattern>
+                   [ %-5level] [%date{yyyy-MM-dd HH:mm:ss}] %logger{96} [%line] - %msg%n
+              </pattern>
+              <charset>UTF-8</charset> <!-- 此处设置字符集，防止中文乱码 -->
+          </encoder>
+        <!-- 配置日志所生成的目录以及生成文件名的规则 在logs/mylog-2016-10-31.0.log -->
+          <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+               <fileNamePattern>logs/ospreyService-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+              <timeBasedFileNamingAndTriggeringPolicy
+                   class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                   <!-- 最大64MB 超过最大值，会重新建一个文件-->
+                   <maxFileSize>64 MB</maxFileSize>
+              </timeBasedFileNamingAndTriggeringPolicy>
+          </rollingPolicy>
+     </appender>
+      <!--控制台输出的格式设置 -->
+     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+          <!-- 控制台输出的日志 的格式 -->
+          <encoder>
+              <pattern>
+                   [ %-5level] [%date{yyyy-MM-dd HH:mm:ss}] %logger{96} [%line] - %msg%n
+              </pattern>
+              <charset>UTF-8</charset> <!-- 此处设置字符集 -->
+          </encoder>
+          <!-- 只是DEBUG级别以上的日志才显示 -->
+          <!--<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+              <level>DEBUG</level>
+          </filter>-->
+     </appender>
+
+    <logger name="jdbc.sqlonly" level="WARN"/>
+    <logger name="jdbc.sqltiming" level="INFO"/>
+    <logger name="jdbc.resultsettable" level="INFO"/>
+    <logger name="jdbc.resultset" level="WARN"/>
+    <logger name="jdbc.connection" level="WARN"/>
+    <logger name="jdbc.audit" level="WARN"/>
+
+    <!-- 或者关闭不必要的 -->
+    <logger name="jdbc.connection" level="OFF" />
+    <logger name="jdbc.audit" level="OFF" />
+    <logger name="jdbc.resultset" level="OFF" />
+    <logger name="jdbc.sqlonly" level="OFF" />
+    <logger name="jdbc.sqltiming" level="INFO" />
+    <logger name="jdbc.resultsettable" level="INFO"/>
+
+     <root level="INFO">
+        <appender-ref ref="FILE" />
+         <!--  <appender-ref ref="STDOUT" /> -->
+     </root> 
+</configuration>

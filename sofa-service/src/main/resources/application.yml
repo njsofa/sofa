@@ -1,0 +1,90 @@
+server:
+  port: 8086
+spring:
+  application:
+    name: sofa-service
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/sofa?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+    username: root
+    password: weiyimei
+    driver-class-name: com.mysql.jdbc.Driver
+    druid:
+      initial-size: 1
+      min-idle: 10
+      max-active: 10
+      test-on-borrow: true
+      test-while-idle: true
+      time-between-eviction-runs-millis: 300000
+      min-evictable-idle-time-millis: 600000
+      stat-view-servlet:
+        allow: true
+
+
+#eureka配置
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.0.240:8080/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${random.int}
+
+# redis配置
+redistemplate-token:
+  hostName: 192.168.0.71
+  password: weiyimei
+  maxIdle: 100
+  port: 6379
+  maxTotal: 2000
+  index: 0
+  maxWaitMillis: 1000
+  testOnBorrow: true
+
+redistemplate-role:
+  hostName: 192.168.0.71
+  password: weiyimei
+  maxIdle: 100
+  port: 6379
+  maxTotal: 2000
+  index: 0
+  maxWaitMillis: 1000
+  testOnBorrow: true
+
+redistemplate:
+  hostName: 192.168.0.71
+  password: weiyimei
+  maxIdle: 100
+  port: 6379
+  maxTotal: 2000
+  index: 0
+  maxWaitMillis: 1000
+  testOnBorrow: true
+
+kafka:
+  bootstrapServers: 192.168.0.71:9092
+  groupId: 0
+  enableAutoCommit: true
+  autoCommitIntervalMs: 1000
+  sessionTimeoutMs: 15000
+  keyDeserializer: org.apache.kafka.common.serialization.StringDeserializer
+  valueDeserializer: org.apache.kafka.common.serialization.StringDeserializer
+  keySerializer: org.apache.kafka.common.serialization.StringSerializer
+  valueSerializer: org.apache.kafka.common.serialization.StringSerializer
+
+service-wym-cloud:
+  url: https://home.jswym.com:58025/
+
+#mybatis
+mybatis:
+  config-location: classpath:mybatis-config.xml
+
+#日志配置
+logging:
+  config: classpath:logback-spring.xml
+
+report:
+  menu:
+    id: 100306
+config:
+  env: dev
